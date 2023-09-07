@@ -16,7 +16,7 @@ Next, one must build out a scale for each column of this array, creating the sec
 
 This leaves you with a two dimensional array with infinite root columns and more than 12 (maybe 14) scale degree rows.  Like we said, the keyboard cant be infinite, so we have to choose the breadth of the harmonic ambitus that one can reasonable be expected to need in one song; should the player need to play beyond it, they may move their frame of reference the Stradella board) by using the transpose keys or by adjusting GTC. For now, we are working with the tried and true 12 root layout (Db to F#) based on a 48 bass (12x4) accordion. So that gives us a 12 by 14-ish array. 
 
-This array can be represented and automatically generated in a spreadsheet, and in fact, [it is.](documentation/tuning_array.ods) 
+This array can be represented and automatically generated in a spreadsheet, and in fact, [it is.](tuning_array.ods) 
 
 ## Lets talk about chord voicings
 
