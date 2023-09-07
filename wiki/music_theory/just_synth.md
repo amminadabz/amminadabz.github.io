@@ -2,7 +2,7 @@
 
 ## Foreword
 
-This article is a written record of my thought process in conceptualizing the tuning algorithm. As such it should be an effective, if not the most efficient, means of understanding why the algorithm works the way it does: each problem that it needs to address, and how it addresses it.
+This article is a written record of my thought process in conceptualizing the tuning algorithm. As such it should be an effective, if not the most efficient, means of learning why the algorithm works the way it does: each problem that it needs to address, and how it addresses it.
 
 ## Tuning array
 
@@ -10,27 +10,27 @@ Now we must begin stacking and nesting all of the mathematical systems in harmon
 
 First, a global tonal center must be established, ideally for the keynote of the song. A possible default is the common A = 440 Hz. We will call this pitch **GTC**. GTC will be placed at the root of the home row (in red) 
 
-From this starting point, the circle of fifths can be filled out. Moving clockwise, multiply by 3:2, and moving counterclockwise, by the inverse 2:3. You now have a one dimensional array which extends infinitely along the horizontal axis, but your keyboard does not. This is because *a just tempered circle of fifths does not loop back on itself*; repeated multiplication of 3:2 does not allow it. So it's really more of a spiral of fifths. 
+From this starting point, the circle of fifths can be filled out. Moving clockwise, multiply by 3:2, and moving counterclockwise, by the inverse 2:3. You now have a one dimensional array which extends infinitely along the horizontal axis, but your keyboard does not. This is because *a just tempered circle of fifths does not loop back on itself*; repeated multiplication of 3:2 does not allow it. So it's really more of an infinite spiral of fifths. We can therefore only make a small section of this infinite array available to the user at one time; 
 
 Next, one must build out a scale for each column of this array, creating the second dimension. It would be optimal to include in this dimension alternative ratios for some intervals, such as the 9:5 minor seventh or the 7:6 blues minor third.  
 
-This leaves you with a two dimensional array with infinite root columns and more than 12 (maybe 14) scale degree rows.  Like we said, the keyboard cant be infinite, so we have to choose the breadth of the harmonic ambitus that one can reasonable be expected to need in one song. For now, we are working with the tried and true 12 root layout (Db to F#) based on a 48 bass (12x4) accordion. So that gives us a 12 by 14ish array. 
+This leaves you with a two dimensional array with infinite root columns and more than 12 (maybe 14) scale degree rows.  Like we said, the keyboard cant be infinite, so we have to choose the breadth of the harmonic ambitus that one can reasonable be expected to need in one song; should the player need to play beyond it, they may move their frame of reference the Stradella board) by using the transpose keys or by adjusting GTC. For now, we are working with the tried and true 12 root layout (Db to F#) based on a 48 bass (12x4) accordion. So that gives us a 12 by 14-ish array. 
 
-This can be represented and automatically generated in a spreadsheet, and in fact, it is. See documentation/tuning_array.ods 
+This array can be represented and automatically generated in a spreadsheet, and in fact, [it is.](documentation/tuning_array.ods) 
 
 ## Lets talk about chord voicings
 
-There are a couple of approaches we could take to chord voicings. One is to decide on a few preset voicings and let the user toggle between them. Another is to provide a sort of slider to adjust how many high and low notes to add. And yet another is to apply a sort of algorithm to act as a high and low pass filter (though not actually a filter, just a control on the volume of certain notes in the chord) so that the chord fades out into the high and low end, again with either a toggle or an analog adjustment. This gives the effect of every chord sounding like a segment of a Sheppard tone, so every chord sounds like it is occupying the same area of pitch space.
+There are a couple of approaches we could take to chord voicings. One is to decide on a few preset voicings and let the user toggle between them. Another is to provide a sort of slider to adjust how many high and low notes to add. And yet another is to apply a sort of algorithm to act as a high and low pass filter (though not actually a filter, just a control on the volume of certain notes in the chord) so that the chord fades out into the high and low end, again with either a toggle or an analog adjustment. This gives the effect of every chord sounding like a Sheppard tone, so every chord sounds like it is occupying the same area of pitch space.
 
 ## Interaction with a piano keyboard
 
 It is important to consider whether the just tuning method designed for a stradella keyboard will be compatible with a piano keyboard, and even with itself. 
 
-The strategy of laying out the tuning for every note from the one GTC breaks down as soon as one moves an interval other than a perfect fifth. If, for example, one wanted to move from a C major chord to a D minor chord: that d would be in tune with g, which would be in tune with c, but there is no transitive property of just intonation to say that the d is in tune with the C, and in fact the act of repeatedly stacking fifthes goes aginst the spirit of just intonation. Such a method is called Pythagorean tuning, and its benefits and detriments are a topic for another day.
+The strategy of laying out the tuning for every note from the one GTC avoids comma pumps, but it breaks down as soon as one moves any interval other than a perfect fifth. If, for example, one wanted to move from a C major chord to a D minor chord: that d would be in tune with g, which would be in tune with c, but there is no transitive property of just intonation to say that the d is in tune with the C, and in fact the act of repeatedly stacking fifths arguably goes against the spirit of just intonation. Such a method is called Pythagorean tuning, and its benefits and detriments are a topic for another day.
 
-So then, it seems the most logical approach is to generate tuning tables on the fly.
+So then, it seems the most logical approach is to generate tuning tables on the fly based on whatever notes are being played in that instant.
 
-## Examples
+## Examples and Edge Cases
 
 Let's walk through some examples and explore the options for a tuning approach. We'll start with a simple functional progression:
 
